@@ -12,7 +12,7 @@ export default class Dot {
 		});
 		this.position = position;
 		this.color = color;
-		this.dotSize = 2;
+		this.dotSize = 3;
 		this.shape = new Shape.Circle({
 			position: position,
 			radius: this.dotSize,

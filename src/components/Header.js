@@ -19,24 +19,28 @@ export default class Header extends Component {
 		return (
 			// <div className='header'>
 			<div className='header-wrapper'>
-				<div className='header-wrapper-logo'>
-					{/* <img id='app-logo' className='app-logo' src={appIcon} alt='App Logo' title='App Logo' /> */}
-					<object
-						id='app-logo'
-						className='app-logo'
-						data={appIcon}
-						type='image/svg+xml'></object>
-				</div>
+				{this.newMethod()}
 				<div className='header-wrapper-title'>
 					<Typography variant='h1' style={th1}>
-						dot-to-dot
+						Dot-to-Dot
 					</Typography>
 					<Typography variant='h2' style={th2}>
-						Create and share your own dot to dot puzzles
+						Creator
 					</Typography>
 				</div>
 			</div>
 			// </div>
 		);
+	}
+
+	newMethod() {
+		return <div className='header-wrapper-logo'>
+
+			<object
+				id='app-logo'
+				className='app-logo'
+				data={appIcon}
+				type='image/svg+xml'></object>
+		</div>;
 	}
 }

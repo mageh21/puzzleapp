@@ -7,7 +7,6 @@ import IconButton from '@material-ui/core/IconButton';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import TuneIcon from '@material-ui/icons/Tune';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import HelpIcon from '@material-ui/icons/Help';
 import PreloaderLoop from './PreloaderLoop';
 
 
@@ -79,7 +78,6 @@ export default class IOControls extends Component {
 				this.preloaderAnimation.play();
 			}
 			reader.onprogress = (event) => {
-				let percentLoaded = Math.round((event.loaded / event.total) * 100);
 			}
 			reader.onloadend = () => {
 				this.setState({
@@ -149,13 +147,13 @@ export default class IOControls extends Component {
 						</span>
 					</Tooltip>
 
-					<Tooltip title='Help' aria-label='Help'>
+					{/* <Tooltip title='Help' aria-label='Help'>
 						<span>
 							<IconButton onClick={this.toggleAboutPanel}>
 								<HelpIcon />
 							</IconButton>
 						</span>
-					</Tooltip>
+					</Tooltip> */}
 				</div>
 
 				{this.state.showImageAdjustmentPanel && <ImageAdjustmentPanel

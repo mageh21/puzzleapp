@@ -1,13 +1,16 @@
 {
+  "homepage": "http://mageh21.github.io/puzzleapp",
   "name": "dot-to-dot",
   "version": "1.0.0",
   "description": "Experimental web app to draw dot-to-dot images",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "webpack-dev-server --config webpack.dev.js --open --hot",
     "build": "webpack --config webpack.prod.js"
   },
-  "author": "Ricardo Sanchez",
+  "author": "Puzzle Creator",
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.10.1",
@@ -43,6 +46,7 @@
     "bootstrap": "^4.5.0",
     "css-loader": "^2.1.1",
     "file-loader": "^4.3.0",
+    "gh-pages": "^3.1.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.7.0",

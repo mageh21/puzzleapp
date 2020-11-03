@@ -30,7 +30,7 @@ export default class Sketch extends Component {
 			addDotEnable: true,
 			eraseDotEnable: false,
 			showPath: false,
-			currentColour: { h: 0, s: 1, l: 0.5, a: 1 },
+			currentColour: { h: 0, s: 0, l: 0, a: 0 },
 			imageOpacity: 0.5,
 			imageScale: 1,
 			openSnackbarAddDotState: false
@@ -186,9 +186,9 @@ export default class Sketch extends Component {
 			// Creates a new colour that auto change its tint
 			const { h, s, l } = this.state.currentColour;
 			const colour = new Color({ hue: h, saturation: s, lightness: l });
-			colour.hue >= 359 ? (colour.hue = 0) : (colour.hue += 2);
+			colour.hue >= 0 ? (colour.hue = 0) : (colour.hue += 0);
 			// Udapte colour after it is been applied
-			this.handleColourChange({ h: colour.hue, s: colour.saturation, l: colour.lightness });
+			//this.handleColourChange({ h: colour.hue, s: colour.saturation, l: colour.lightness });
 
 			// Creates a new Dot object and store it in an array
 			const dot = new Dot(this.dot_id, position, colour, this.group);
@@ -276,8 +276,8 @@ export default class Sketch extends Component {
 		this.rasterGrp.visible = false;
 		this.viewRect.strokeColor = 'white';
 		this.dots.forEach((dot) => {
-			dot.shape.radius = 1.5;
-			dot.id.fontSize = 8;
+			dot.shape.radius = 3;
+			dot.id.fontSize = 10;
 		});
 		if (this.state.showPath) this.path.visible = false;
 
@@ -285,8 +285,8 @@ export default class Sketch extends Component {
 		paper.view.draw();
 
 		const docPageSize = {
-			width: 596,
-			height: 842
+			width: 612,
+			height: 792
 		};
 
 		const docTextOptions = {
@@ -314,36 +314,37 @@ export default class Sketch extends Component {
 			size: [docPageSize.width, docPageSize.height],
 			// size: 'A7',
 			margins: {
-				top: 0,
-				bottom: 0,
-				left: 0,
-				right: 0
+				top: 4,
+				bottom: 4,
+				left: 4,
+				right: 4
 			}
 		});
 		const stream = doc.pipe(blobStream());
 
-		SVGtoPDF(doc, appLogoSrc, 250, 15, { width: 100, height: 50 });
+		// SVGtoPDF(doc, appLogoSrc, 250, 15, { width: 100, height: 50 });
 
-		doc.font('Helvetica');
-		doc.fontSize(14);
-		doc.text('dot-to-dot', 0, 80, docTextOptions);
+		// doc.font('Helvetica');
+		// doc.fontSize(14);
+		// doc.text('dot-to-dot', 0, 80, docTextOptions);
+		// doc.fontSize(10);
+		// doc.moveDown();
+		// doc.text('Connect the dots to solve the puzzle', docTextOptions);
+		// doc.moveDown();
+		// doc.moveDown();
+		// doc.fontSize(14);
+		// doc.text(this.drawingTitle, docTextOptions);
+
+		//SVGtoPDF(doc, sketchSvgData, margin / 2, 150, sketchSvgOptions);
+		SVGtoPDF(doc, sketchSvgData, margin / 2, 75, sketchSvgOptions);
+
 		doc.fontSize(10);
-		doc.moveDown();
-		doc.text('Connect the dots to solve the puzzle', docTextOptions);
-		doc.moveDown();
-		doc.moveDown();
-		doc.fontSize(14);
-		doc.text(this.drawingTitle, docTextOptions);
-
-		SVGtoPDF(doc, sketchSvgData, margin / 2, 150, sketchSvgOptions);
-
-		doc.fontSize(10);
-		doc.text(
-			`Total number of dots: ${this.dots.length}`,
-			0,
-			docPageSize.height - 25,
-			docTextOptions
-		);
+		// doc.text(
+		// 	`Total number of dots: ${this.dots.length}`,
+		// 	0,
+		// 	docPageSize.height - 25,
+		// 	docTextOptions
+		// );
 		doc.end();
 
 		stream.on('finish', function() {
@@ -354,7 +355,7 @@ export default class Sketch extends Component {
 		// After the pdf is created show the raster again
 		this.viewRect.strokeColor = 'grey';
 		this.dots.forEach((dot) => {
-			dot.shape.radius = 2;
+			dot.shape.radius = 3;
 			dot.id.fontSize = 10;
 		});
 		if (this.state.showPath) this.path.visible = true;
